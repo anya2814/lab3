@@ -8,6 +8,7 @@ QT       += core gui
 #QT       += sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT += charts
 
 TARGET = lab3
 TEMPLATE = app
@@ -26,7 +27,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    filestrategy.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    ioccontainer.h \
+    filestrategy.h
