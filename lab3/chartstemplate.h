@@ -2,7 +2,7 @@
 #define CHARTSTEMPLATE_H
 
 
-class ChartsTemplate
+/*class ChartsTemplate
 {
 public:
     ChartsTemplate();
@@ -36,6 +36,6 @@ class SplineChart: public ChartsTemplate
 class ScatterChart: public ChartsTemplate
 {
 
-};
+};*/
 
 #endif // CHARTSTEMPLATE_H

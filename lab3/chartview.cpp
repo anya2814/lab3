@@ -1,6 +1,6 @@
 #include "chartview.h"
 
-ChartView::ChartView()
+/*ChartView::ChartView()
 {
 
-}
+}*/

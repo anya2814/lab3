@@ -2,10 +2,10 @@
 #define CHARTVIEW_H
 
 
-class ChartView
+/*class ChartView
 {
 public:
     ChartView();
-};
+};*/
 
 #endif // CHARTVIEW_H

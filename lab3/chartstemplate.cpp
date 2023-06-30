@@ -1,8 +1,8 @@
 #include "chartstemplate.h"
 
-ChartsTemplate::ChartsTemplate()
+/*ChartsTemplate::ChartsTemplate()
 {
 
-}
+}*/
 
 
