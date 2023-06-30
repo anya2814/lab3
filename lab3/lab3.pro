@@ -28,9 +28,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    filestrategy.cpp
+    filestrategy.cpp \
+    chartstemplate.cpp \
+    chartview.cpp
 
 HEADERS += \
         mainwindow.h \
     ioccontainer.h \
-    filestrategy.h
+    filestrategy.h \
+    chartstemplate.h \
+    chartview.h

@@ -1,0 +1,13 @@
+#include "filestrategy.h"
+
+void FileJSON::read(QMap *fileData, const QString path)
+{
+    
+};
+
+void FileDat::read(QMap *fileData, const QString path)
+{
+    
+};
+
+

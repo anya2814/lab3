@@ -10,6 +10,7 @@
 #include <QtCharts/QStackedBarSeries>
 #include <QtCharts/QBarSet>
 #include <QtCharts/QBarSeries>
+#include <QStatusBar>
 
 #include <QtCharts/QPieSeries>
 #include <QtCharts/QPieSlice>
@@ -43,34 +44,11 @@ QT_CHARTS_END_NAMESPACE
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
-    //, ui(new Ui::MainWindow)
 {
-    //ui->setupUi(this);
-    /*
-     * Создаем виджет.
-     * Виджет из официального примера с графиками.
-     * В этом примере рассмтривается принцип созадния различных графиков.
-     * Обратите внимание в предложенной реализации на методы
-     * QChart *createAreaChart() const;
-     * QChart *createBarChart(int valueCount) const;
-     * QChart *createPieChart() const;
-     * QChart *createLineChart() const;
-     * QChart *createSplineChart() const;
-     * QChart *createScatterChart() const;
-     *
-    */
-    themeWidget = new ThemeWidget();
-
-
-    //Устанавливаем размер главного окна
     this->setGeometry(100, 100, 1500, 500);
     this->setStatusBar(new QStatusBar(this));
     this->statusBar()->showMessage("Choosen Path: ");
-    /*
-     * QSplitter - Разделитель.
-     *  Для знакомства  -  * https://evileg.com/ru/post/73/
-     *
-    */
+
     QLabel *justTmpLabel = new QLabel(this);
     justTmpLabel->setText("------В этой части будем отображать файлы с данными для графика----");
 
@@ -110,12 +88,27 @@ MainWindow::MainWindow(QWidget *parent)
     chartBar->addSeries(series);
     chartBar->createDefaultAxes();
     splitter->addWidget(chartView);
-    //Еще добавми themeWidget. Теперь будут отображаться три объекта разделенные сплиттером.
-    splitter->addWidget(themeWidget);
+    //splitter->addWidget(themeWidget);
+
     setCentralWidget(splitter);
 
 }
 
+/*QComboBox *MainWindow::createTypeBox() const
+{
+    // settings layout
+    QComboBox *themeComboBox = new QComboBox();
+    themeComboBox->addItem("Light", QChart::ChartThemeLight);
+    themeComboBox->addItem("Blue Cerulean", QChart::ChartThemeBlueCerulean);
+    themeComboBox->addItem("Dark", QChart::ChartThemeDark);
+    themeComboBox->addItem("Brown Sand", QChart::ChartThemeBrownSand);
+    themeComboBox->addItem("Blue NCS", QChart::ChartThemeBlueNcs);
+    themeComboBox->addItem("High Contrast", QChart::ChartThemeHighContrast);
+    themeComboBox->addItem("Blue Icy", QChart::ChartThemeBlueIcy);
+    themeComboBox->addItem("Qt", QChart::ChartThemeQt);
+    return themeComboBox;
+}
+*/
 MainWindow::~MainWindow()
 {
     //delete ui;
