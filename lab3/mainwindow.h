@@ -3,24 +3,9 @@
 
 #include <QMainWindow>
 #include <QtCharts/QChartGlobal>
-
-QT_BEGIN_NAMESPACE
-namespace Ui
-{
-    class MainWindow;
-}
-QT_END_NAMESPACE
-
-QT_BEGIN_NAMESPACE
-class QComboBox;
-class QCheckBox;
-QT_END_NAMESPACE
-
-QT_CHARTS_BEGIN_NAMESPACE
-class QChartView;
-class QChart;
-QT_CHARTS_END_NAMESPACE
-
+#include "chartdata.h"
+#include "chartwidget.h"
+#include "filewidget.h"
 
 QT_CHARTS_USE_NAMESPACE
 
@@ -29,7 +14,11 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 public:
     MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    ~MainWindow() = default;
+private:
+    DataVector m_chartData;
+    ChartWidget *m_chartWidget;
+    //FileWidget *fileWidget;
 };
 
 #endif // MAINWINDOW_H

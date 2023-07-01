@@ -29,12 +29,14 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     chartstemplate.cpp \
-    chartview.cpp \
-    chartdata.cpp
+    chartdata.cpp \
+    filewidget.cpp \
+    chartwidget.cpp
 
 HEADERS += \
         mainwindow.h \
     ioccontainer.h \
     chartstemplate.h \
-    chartview.h \
-    chartdata.h
+    chartdata.h \
+    filewidget.h \
+    chartwidget.h

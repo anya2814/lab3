@@ -13,7 +13,7 @@
 bool SQLiteData::read(DataVector fileData, const QString path)
 {
     if (!QFile::exists(path)) return 0;
-    //fileData = DataMap();
+    fileData = DataVector();
 
     QSqlDatabase dbase = QSqlDatabase::addDatabase("QSQLITE");
     dbase.setDatabaseName(path);
@@ -57,7 +57,6 @@ bool SQLiteData::read(DataVector fileData, const QString path)
         prevMonth = month;
         n = 1;
     }
-
     }
 
     dbase.close();

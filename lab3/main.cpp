@@ -3,7 +3,6 @@
 
 #include"chartdata.h"
 #include"memory"
-typedef QMap<QPointF, QString> DataMap;
 
 int main(int argc, char *argv[])
 {

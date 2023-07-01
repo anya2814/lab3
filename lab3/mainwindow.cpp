@@ -37,61 +37,25 @@
 //#include <QtCharts/QAbstractAxis>
 //#include <QtCharts/QAbstractSeries>
 
-QT_CHARTS_BEGIN_NAMESPACE
-class QChartView;
-class QChart;
-QT_CHARTS_END_NAMESPACE
-
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    this->setGeometry(100, 100, 1500, 500);
-    this->setStatusBar(new QStatusBar(this));
-    this->statusBar()->showMessage("Choosen Path: ");
-
     QLabel *justTmpLabel = new QLabel(this);
     justTmpLabel->setText("------В этой части будем отображать файлы с данными для графика----");
 
 
-    QSplitter *splitter = new QSplitter(parent);
+    QSplitter *splitter = new QSplitter(this);
+    m_chartWidget = new ChartWidget (this, m_chartData);
+    //m_fileWidget = new FileWidget();
+    setGeometry(100, 100, 1500, 500);
+    setStatusBar(new QStatusBar(this));
+    statusBar()->showMessage("Choosen Path: ");
+
     splitter->addWidget(justTmpLabel);
-    //1.Добавление диаграмы(графика). Диаграмму создаем в несколько шагов.
-    QtCharts::QChartView *chartView = nullptr;
-    //Объявление представления графика.Представление отображает график.
-    /*Создание графика*/
-    QtCharts::QChart *chartBar = new QtCharts::QChart();
-    chartBar->setTitle("Bar chart"); //Устанавливаем заголовок графика
-
-    /*Класс QStackedBarSeries представляет серию данных в виде вертикально расположенных полос, по одной полосе на категорию.*/
-    QStackedBarSeries *series = new QStackedBarSeries(chartBar); //Работаем с гиcтограммой.
-    // Класс QBarSet представляет один набор столбцов на гистограмме.
-    QBarSet *set = nullptr;
-
-    //	set seed for random stuff
-    qsrand(QTime(0, 0, 0).secsTo(QTime::currentTime()));
-
-    for (int i(0); i < 10; i++) {
-
-        set = new QBarSet("Bar set " + QString::number(i));
-        qreal yValue(0);
-
-        for (int j(0); j < 5; j++) {
-            yValue = yValue + (qreal)(qrand() % 121 + j) / (qreal) 10 + j;
-            *set << yValue;
-        }
-
-        series->append(set);
-    }
-
-    chartView = new QChartView(chartBar);
-    chartView->setMinimumSize(QSize(700, 500));
-    chartBar->addSeries(series);
-    chartBar->createDefaultAxes();
-    splitter->addWidget(chartView);
-    //splitter->addWidget(themeWidget);
+    splitter->addWidget(m_chartWidget);
+    //splitter->addWidget(fileWidget);
 
     setCentralWidget(splitter);
-
 }
 
 /*QComboBox *MainWindow::createTypeBox() const
@@ -109,7 +73,4 @@ MainWindow::MainWindow(QWidget *parent)
     return themeComboBox;
 }
 */
-MainWindow::~MainWindow()
-{
-    //delete ui;
-}
+
