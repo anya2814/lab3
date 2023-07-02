@@ -49,28 +49,12 @@ MainWindow::MainWindow(QWidget *parent)
     //m_fileWidget = new FileWidget();
     setGeometry(100, 100, 1500, 500);
     setStatusBar(new QStatusBar(this));
-    statusBar()->showMessage("Choosen Path: ");
+    statusBar()->showMessage("Выбранный путь: ");
 
     splitter->addWidget(justTmpLabel);
     splitter->addWidget(m_chartWidget);
-    //splitter->addWidget(fileWidget);
+    //splitter->addWidget(m_fileWidget);
 
     setCentralWidget(splitter);
 }
-
-/*QComboBox *MainWindow::createTypeBox() const
-{
-    // settings layout
-    QComboBox *themeComboBox = new QComboBox();
-    themeComboBox->addItem("Light", QChart::ChartThemeLight);
-    themeComboBox->addItem("Blue Cerulean", QChart::ChartThemeBlueCerulean);
-    themeComboBox->addItem("Dark", QChart::ChartThemeDark);
-    themeComboBox->addItem("Brown Sand", QChart::ChartThemeBrownSand);
-    themeComboBox->addItem("Blue NCS", QChart::ChartThemeBlueNcs);
-    themeComboBox->addItem("High Contrast", QChart::ChartThemeHighContrast);
-    themeComboBox->addItem("Blue Icy", QChart::ChartThemeBlueIcy);
-    themeComboBox->addItem("Qt", QChart::ChartThemeQt);
-    return themeComboBox;
-}
-*/
 

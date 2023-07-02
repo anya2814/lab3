@@ -6,7 +6,7 @@ ChartWidget::ChartWidget(QWidget *parent, DataVector const& data)
     m_chartView = new QChartView();
     m_typeComboBox = new QComboBox;
     m_colorbwCheckBox = new QCheckBox;
-    m_PDFPushButton = new QPushButton("Save as PDF");
+    m_PDFPushButton = new QPushButton("Сохранить в формате PDF");
     m_sharedView = new QStackedWidget;
     QVBoxLayout *vlayout = new QVBoxLayout(this);
     QHBoxLayout *hlayout = new QHBoxLayout();
@@ -19,12 +19,12 @@ ChartWidget::ChartWidget(QWidget *parent, DataVector const& data)
     m_typeComboBox->setEditable(false);
     m_typeComboBox->setMinimumWidth(80);
 
-    for (int i = 0; i < (int) ChartType::countTypes; i++) {
-            m_typeComboBox->addItem("hello"); // нужно сделать типы в строку
+    for (int i = 0; i < (int) EChartType::countTypes; i++) {
+            m_typeComboBox->addItem("привет"); // нужно сделать типы в строку
         }
 
     // тут надо обновить вывод на дефолтный тип графика
-    m_chartType = ChartType(0);
+    m_chartType = EChartType(0);
 
     m_typeComboBox->setDisabled(true);
     m_colorbwCheckBox->setDisabled(true);
@@ -34,10 +34,10 @@ ChartWidget::ChartWidget(QWidget *parent, DataVector const& data)
     m_chartView->setFrameStyle(QFrame::StyledPanel);
     m_chartView->setChart(chart);
 
-    QLabel *chartTypeLabel = new QLabel("Chart type:");
+    QLabel *chartTypeLabel = new QLabel("Тип графика:");
     chartTypeLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
-    QLabel *colorbwLabel = new QLabel ("black/white");
+    QLabel *colorbwLabel = new QLabel ("чёрно/белый");
     colorbwLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
     hlayout->addWidget(chartTypeLabel);

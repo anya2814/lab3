@@ -4,10 +4,10 @@
 #include <QWidget>
 #include <QtCharts/QtCharts>
 #include <QtCharts/QChart>
-#include <chartdata.h>
+#include "chartdata.h"
+#include "chartstemplate.h"
 //#include <ioccontainer.h>
 
-enum class ChartType { Pie, Bar, countTypes};
 
 class ChartWidget: public QWidget
 {
@@ -27,7 +27,7 @@ private:
     QPushButton *m_PDFPushButton;
     QStackedWidget *m_sharedView;
 
-    ChartType m_chartType;
+    EChartType m_chartType;
 };
 
 #endif // CHARTVIEW_H
