@@ -7,17 +7,21 @@
 #include <QTreeView>
 #include <QTableView>
 
-/*class FileWidget : public QWidget
+#include "chartdata.h"
+
+class FileWidget : public QWidget
 
 {
-    Q_OBJECT
+    //Q_OBJECT
 
 public:
     FileWidget(QWidget *parent = nullptr);
     ~FileWidget();
 private:
-    QFileSystemModel *m_model;
+    QFileSystemModel *m_tableModel;
+    //QFileSystemModel *m_treeModel;
     QTableView *m_tableView;
+    //QTreeView *m_treeView;
 };
-*/
+
 #endif // FILEVIEW_H

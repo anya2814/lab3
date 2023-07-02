@@ -14,12 +14,13 @@
 
 #include "chartdata.h"
 
-enum class EChartType { Pie, Bar, countTypes};
+enum class EChartType {Pie, Bar};
+static inline QVector<QString> CHART_TYPE {"Pie", "Bar"};
+static inline int countTypes = 2;
 
 class ChartsTemplate
 {
 public:
-    QString asString(EChartType type);
     virtual bool createChart(QChart* chart, DataVector const& data) = 0;
 };
 

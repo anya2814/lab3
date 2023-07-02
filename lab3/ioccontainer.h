@@ -116,6 +116,6 @@ public:
 };
 
 // инициализируем ненулевым числом
-int IOCContainer::s_nextTypeId = 115094801;
+//int IOCContainer::s_nextTypeId = 115094801;
 
 #endif // IOCCONTAINER_H

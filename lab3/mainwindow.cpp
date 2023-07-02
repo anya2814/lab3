@@ -40,20 +40,15 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    QLabel *justTmpLabel = new QLabel(this);
-    justTmpLabel->setText("------В этой части будем отображать файлы с данными для графика----");
-
-
     QSplitter *splitter = new QSplitter(this);
     m_chartWidget = new ChartWidget (this, m_chartData);
-    //m_fileWidget = new FileWidget();
+    m_fileWidget = new FileWidget(this);
     setGeometry(100, 100, 1500, 500);
     setStatusBar(new QStatusBar(this));
     statusBar()->showMessage("Выбранный путь: ");
 
-    splitter->addWidget(justTmpLabel);
+    splitter->addWidget(m_fileWidget);
     splitter->addWidget(m_chartWidget);
-    //splitter->addWidget(m_fileWidget);
 
     setCentralWidget(splitter);
 }

@@ -6,7 +6,7 @@
 #include <QtCharts/QChart>
 #include "chartdata.h"
 #include "chartstemplate.h"
-//#include <ioccontainer.h>
+#include "ioccontainer.h"
 
 
 class ChartWidget: public QWidget

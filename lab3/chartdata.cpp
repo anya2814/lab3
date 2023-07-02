@@ -1,14 +1,14 @@
 #include "chartdata.h"
 
-/*bool JSONData::read(DataList fileData, const QString path)
+bool JSONData::read(DataVector fileData, const QString path)
 {
-    QFile file = QFile(path);
+    /*QFile file = QFile(path);
     fileData = DataMap();
     //проверка, открылся ли файл
     if (!file.exists() || !file.open(QIODeviceBase::ReadOnly)) return 0;
-
-    return 1;
-};*/
+*/
+    return 0;
+}
 
 bool SQLiteData::read(DataVector fileData, const QString path)
 {
@@ -49,7 +49,7 @@ bool SQLiteData::read(DataVector fileData, const QString path)
     else {
         averageValue = averageValue/ (n*(1.0));
         QString monthNum = QString::number(prevMonth);
-        Data d(QString::number(prevYear) + "." + month, QString::number(averageValue));
+        Data d(QString::number(prevYear) + "." + monthNum, QString::number(averageValue));
         fileData.push_back(d);
 
         averageValue = value;
@@ -61,6 +61,4 @@ bool SQLiteData::read(DataVector fileData, const QString path)
 
     dbase.close();
     return 1;
-};
-
-
+}

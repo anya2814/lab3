@@ -19,8 +19,8 @@ ChartWidget::ChartWidget(QWidget *parent, DataVector const& data)
     m_typeComboBox->setEditable(false);
     m_typeComboBox->setMinimumWidth(80);
 
-    for (int i = 0; i < (int) EChartType::countTypes; i++) {
-            m_typeComboBox->addItem("привет"); // нужно сделать типы в строку
+    for (int i = 0; i < (int) countTypes; i++) {
+            m_typeComboBox->addItem(CHART_TYPE[i]);
         }
 
     // тут надо обновить вывод на дефолтный тип графика

@@ -18,7 +18,7 @@ public:
 private:
     DataVector m_chartData;
     ChartWidget *m_chartWidget;
-    //FileWidget *m_fileWidget;
+    FileWidget *m_fileWidget;
 };
 
 #endif // MAINWINDOW_H

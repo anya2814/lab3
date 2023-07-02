@@ -1,6 +1,6 @@
 #include "chartstemplate.h"
 
-QString ChartsTemplate::asString(EChartType type) {
+/*QString typeAsString(EChartType type){
     QString s;
     switch (type) {
         case EChartType::Pie: s = "Pie"; break;
@@ -8,7 +8,7 @@ QString ChartsTemplate::asString(EChartType type) {
         default: s = ""; break;
     }
     return s;
-}
+}*/
 
 bool BarChart::createChart(QChart* chart, DataVector const& data) {
     QBarSeries *series = new QBarSeries(chart);
@@ -47,5 +47,5 @@ bool PieChart::createChart(QChart* chart, DataVector const& data) {
     chart->addSeries(series);
     chart->legend()->show();
 
-    return true;
+    return 1;
 }
