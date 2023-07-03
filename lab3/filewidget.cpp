@@ -11,9 +11,7 @@
 
 FileWidget::FileWidget(QWidget *parent): QWidget(parent)
 {
-    //m_treeModel =  new QFileSystemModel(this);
-    //m_treeModel->setFilter(QDir::NoDotAndDotDot | QDir::AllDirs);
-
+    m_catalogPushButton = new QPushButton(this);
     m_tableModel = new QFileSystemModel(this);
     m_tableModel->setFilter(QDir::NoDotAndDotDot | QDir::Files);
     QStringList filters;
@@ -23,40 +21,39 @@ FileWidget::FileWidget(QWidget *parent): QWidget(parent)
     m_tableModel->setRootPath(QDir::currentPath());
     QVBoxLayout *vlayout = new QVBoxLayout(this);
 
-    //Показатьв виде "дерева". Пользуемся готовым видом(TreeView):
-    //m_treeView = new QTreeView();
-    // Устанавливаем модель данных для отображения
-    //m_treeView->setModel(leftPartModel);
-    //Раскрываем все папки первого уровня
-    //m_treeView->expandAll();
-
     m_tableView = new QTableView;
     m_tableView->setModel(m_tableModel);
     m_tableView->setRootIndex(m_tableModel->index(QDir::currentPath()));
     m_tableView->setMinimumSize(425, 400);
+
+    m_catalogPushButton->setText("Выбранный путь: " + QDir::currentPath());
+    m_catalogPushButton->setMinimumWidth(80);
+
+    vlayout->addWidget(m_catalogPushButton);
     vlayout->addWidget(m_tableView);
-    /*
-     * QItemSelectionModel *selectionModel отслеживает выбранные элементы в представлении treeView,
-     * также отслеживает текущий выбранный элемент в представлении treeView.
-    */
-    //QItemSelectionModel *selectionModel = m_treeView->selectionModel();
-    //m_treeView->header()->resizeSection(0, 200);
 
-    //Выполняем соединения слота и сигнала который вызывается когда осуществляется выбор элемента в TreeView
-    //connect(selectionModel, &QItemSelectionModel::selectionChanged, this, &FileWidget::on_selectionChangedSlot);
+    QItemSelectionModel *selectionModel = m_tableView->selectionModel();
+    QObject::connect(selectionModel, &QItemSelectionModel::selectionChanged, this, &FileWidget::selectionChangedSlot);
+    QObject::connect(m_catalogPushButton, &QPushButton::clicked, this, &FileWidget::PBcatalogClickedSlot);
+}
 
+void FileWidget::selectionChangedSlot(const QItemSelection& selected, const QItemSelection& deselected) {
+    if (deselected == selected) return;
+
+    //emit fileSelectedSignal(m_tableModel->index(QDir::currentPath()));
+}
+
+void FileWidget::PBcatalogClickedSlot() {
+    auto directory = QFileDialog::getExistingDirectory();
+        if (!directory.isEmpty()) {
+            m_tableModel->setRootPath(directory);
+            m_tableView->setRootIndex(m_tableModel->index(directory));
+            m_catalogPushButton->setText("Выбранный путь: " + directory);
+        }
 }
 
 FileWidget::~FileWidget()
 {
 }
 
-/*
- * Слот для обработки выбора элемента в TreeView.
- * Выбор осуществляется с помощью курсора.
- */
 
-/*void FileWidget::on_selectionChangedSlot(const QItemSelection &selected, const QItemSelection &deselected)
-{
-
-}*/

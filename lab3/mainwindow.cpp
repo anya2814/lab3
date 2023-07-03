@@ -44,8 +44,6 @@ MainWindow::MainWindow(QWidget *parent)
     m_chartWidget = new ChartWidget (this, m_chartData);
     m_fileWidget = new FileWidget(this);
     setGeometry(100, 100, 1500, 500);
-    setStatusBar(new QStatusBar(this));
-    statusBar()->showMessage("Выбранный путь: ");
 
     splitter->addWidget(m_fileWidget);
     splitter->addWidget(m_chartWidget);

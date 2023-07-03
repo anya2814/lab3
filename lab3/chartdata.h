@@ -18,8 +18,6 @@
 typedef QPair<QString, QString> Data;
 typedef QList<Data> DataVector;
 
-
-
 enum class EFileExt {JSON, SQLite};
 static inline QVector<QString> FILE_EXT = { "json", "sqlite"};
 static inline int countFileExt = 2;
