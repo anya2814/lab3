@@ -48,8 +48,7 @@ FileWidget::FileWidget(QWidget *parent): QWidget(parent)
 
 void FileWidget::selectionChangedSlot(const QItemSelection& selected, const QItemSelection& deselected) {
     if (deselected == selected) return;
-    std::shared_ptr<IOCContainer> injector;
-    emit fileSelectedSignal(injector, m_tableModel->fileInfo(selected.indexes().first()));
+    emit fileSelectedSignal(m_tableModel->fileInfo(selected.indexes().first()));
 }
 
 void FileWidget::PBcatalogClickedSlot() {

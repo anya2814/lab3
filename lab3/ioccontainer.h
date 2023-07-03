@@ -117,4 +117,6 @@ public:
     }
 };
 
+extern IOCContainer injector;
+
 #endif // IOCCONTAINER_H

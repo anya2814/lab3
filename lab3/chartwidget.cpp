@@ -52,5 +52,52 @@ ChartWidget::ChartWidget(QWidget *parent, DataVector const& data)
     vlayout->addLayout(hlayout);
     vlayout->addWidget(m_sharedView);
 
-    // в конструкторе еще разные коннекты
+    QObject::connect(m_PDFPushButton, &QPushButton::clicked, this, &ChartWidget::PBprintPDFSlot);
+    QObject::connect(m_typeComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &ChartWidget::CBchartTypeIndexChangedSlot);
+}
+
+void ChartWidget::drawChart() {
+    m_typeComboBox->setDisabled(false);
+    m_PDFPushButton->setDisabled(false);
+
+    auto chartTemplate = injector.GetObject<ChartsTemplate>();
+
+    if (!chartTemplate->setChart(m_chartView->chart(), m_data)) {
+        m_PDFPushButton->setDisabled(true);
+    }
+}
+
+void ChartWidget::dataChangedSlot() {
+    drawChart();
+}
+
+void ChartWidget::dataReadFailedSlot(QString const&) {
+    m_typeComboBox->setDisabled(true);
+    m_PDFPushButton->setDisabled(true);
+}
+
+void ChartWidget::CBtypeChangedSlot(EChartType type) {
+    m_chartType = type;
+    QString arg = QString();
+    for(int i = 0; i < countTypes; i++)
+        if (type == (EChartType)i)
+            arg = CHART_TYPE[i];
+    setChartType(arg);
+    drawChart();
+}
+
+void ChartWidget::PBprintPDFSlot() {
+    QString filePath = QFileDialog::getSaveFileName(nullptr, "Save chart as a PDF document", {}, "PDF (*.pdf)");
+    if (filePath.isEmpty()) return;
+
+    QPdfWriter pdfWriter(filePath);
+    QPainter painter(&pdfWriter);
+    m_chartView->render(&painter);
+    painter.end();
+}
+
+void ChartWidget::CBchartTypeIndexChangedSlot(int empty) {
+    Q_UNUSED(empty);
+    int index = m_typeComboBox->currentIndex();
+    CBtypeChangedSlot((EChartType) index);
 }

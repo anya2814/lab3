@@ -55,14 +55,15 @@ MainWindow::MainWindow(QWidget *parent)
     QObject::connect(this, &MainWindow::dataReadFailedSignal, m_chartWidget, &ChartWidget::dataReadFailedSlot);
 }
 
-void MainWindow::fileSelectedMWSlot(std::shared_ptr<IOCContainer> injector, QFileInfo const& file)
+void MainWindow::fileSelectedMWSlot(QFileInfo const& file)
 {
     QString ext = file.suffix();
-    setStrategy(injector, ext);
-    auto readingStrategy = injector->GetObject<IChartData>();
 
-    /*if (readingStrategy->read(file.absoluteFilePath(), this->m_chartData)) {
+    setStrategy(ext);
+    auto readingStrategy = injector.GetObject<IChartData>();
+
+    if (readingStrategy->read(file.absoluteFilePath(), this->m_chartData)) {
         emit MainWindow::dataChangedSignal();
     }
-    else emit MainWindow::dataReadFailedSignal("");*/
+    else emit MainWindow::dataReadFailedSignal("");
 }

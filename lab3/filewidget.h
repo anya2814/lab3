@@ -15,6 +15,7 @@
 #include <memory>
 
 #include "chartdata.h"
+#include "chartstemplate.h"
 
 class FileWidget : public QWidget
 {
@@ -26,7 +27,7 @@ private slots:
     void selectionChangedSlot(const QItemSelection& selected, const QItemSelection& deselected);
     void PBcatalogClickedSlot();
 signals:
-    void fileSelectedSignal(std::shared_ptr<IOCContainer> injector, QFileInfo const&);
+    void fileSelectedSignal(QFileInfo const&);
 private:
     QFileSystemModel *m_tableModel;
     QTableView *m_tableView;

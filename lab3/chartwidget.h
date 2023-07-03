@@ -6,6 +6,9 @@
 
 #include <QtCharts/QtCharts>
 #include <QtCharts/QChart>
+#include <QPdfWriter>
+#include <QPainter>
+#include <QComboBox>
 
 #include "chartdata.h"
 #include "chartstemplate.h"
@@ -17,18 +20,15 @@ class ChartWidget: public QWidget
 public:
     ChartWidget(QWidget* parent, DataVector const& data);
 public slots:
-signals:
-    void dataChanged();
-    void dataReadFailed(QString const&);
-public slots:
-    void dataChangedSlot() {};
-    void dataReadFailedSlot(QString const&) {};
+    void dataChangedSlot();
+    void dataReadFailedSlot(QString const&);
 private slots:
-    void CBtypeChosenSlot() {};
-    void PBprintPDFSlot() {};
-    void CBchartTypeIndexChangedSlot(int index) {};
-    void CBcolorSchemeIndexChangedSlot(int index) {};
+    void CBtypeChangedSlot(EChartType type);
+    void PBprintPDFSlot();
+    void CBchartTypeIndexChangedSlot(int empty);
 private:
+    void drawChart();
+
     QChartView *m_chartView;
     DataVector m_data;
     QComboBox *m_typeComboBox;

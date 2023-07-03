@@ -14,7 +14,7 @@
 
 #include "chartdata.h"
 
-enum class EChartType {Pie, Bar};
+enum class EChartType {Pie = 0, Bar = 1};
 static inline QVector<QString> CHART_TYPE {"Pie", "Bar"};
 static inline int countTypes = 2;
 

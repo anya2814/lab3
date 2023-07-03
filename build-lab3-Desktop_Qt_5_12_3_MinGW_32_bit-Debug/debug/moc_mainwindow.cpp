@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[8];
-    char stringdata0[119];
+    QByteArrayData data[6];
+    char stringdata0[80];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -36,14 +36,11 @@ QT_MOC_LITERAL(1, 11, 17), // "dataChangedSignal"
 QT_MOC_LITERAL(2, 29, 0), // ""
 QT_MOC_LITERAL(3, 30, 20), // "dataReadFailedSignal"
 QT_MOC_LITERAL(4, 51, 18), // "fileSelectedMWSlot"
-QT_MOC_LITERAL(5, 70, 29), // "std::shared_ptr<IOCContainer>"
-QT_MOC_LITERAL(6, 100, 8), // "injector"
-QT_MOC_LITERAL(7, 109, 9) // "QFileInfo"
+QT_MOC_LITERAL(5, 70, 9) // "QFileInfo"
 
     },
     "MainWindow\0dataChangedSignal\0\0"
     "dataReadFailedSignal\0fileSelectedMWSlot\0"
-    "std::shared_ptr<IOCContainer>\0injector\0"
     "QFileInfo"
 };
 #undef QT_MOC_LITERAL
@@ -66,14 +63,14 @@ static const uint qt_meta_data_MainWindow[] = {
        3,    1,   30,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       4,    2,   33,    2, 0x0a /* Public */,
+       4,    1,   33,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void,
     QMetaType::Void, QMetaType::QString,    2,
 
  // slots: parameters
-    QMetaType::Void, 0x80000000 | 5, 0x80000000 | 7,    6,    2,
+    QMetaType::Void, 0x80000000 | 5,    2,
 
        0        // eod
 };
@@ -86,7 +83,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         switch (_id) {
         case 0: _t->dataChangedSignal(); break;
         case 1: _t->dataReadFailedSignal((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 2: _t->fileSelectedMWSlot((*reinterpret_cast< std::shared_ptr<IOCContainer>(*)>(_a[1])),(*reinterpret_cast< const QFileInfo(*)>(_a[2]))); break;
+        case 2: _t->fileSelectedMWSlot((*reinterpret_cast< const QFileInfo(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -95,7 +92,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 2:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-            case 1:
+            case 0:
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QFileInfo >(); break;
             }
             break;

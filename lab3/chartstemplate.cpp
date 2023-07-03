@@ -1,7 +1,6 @@
 #include "chartstemplate.h"
 
 bool setChartType(QString const& type) {
-    IOCContainer injector;
     if (type == CHART_TYPE[0]) { injector.RegisterInstance<ChartsTemplate, PieChart>(); return 1; }
     if (type == CHART_TYPE[1]) { injector.RegisterInstance<ChartsTemplate, BarChart>(); return 1; }
     return 0;

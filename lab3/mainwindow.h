@@ -18,7 +18,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow() = default;
 public slots:
-    void fileSelectedMWSlot(std::shared_ptr<IOCContainer> injector, QFileInfo const&);
+    void fileSelectedMWSlot(QFileInfo const&);
 signals:
     void dataChangedSignal();
     void dataReadFailedSignal(QString const&);

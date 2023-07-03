@@ -45,6 +45,6 @@ public:
     bool read(const QString& path, DataVector fileData) override;
 };
 
-bool setStrategy(std::shared_ptr<IOCContainer> injector, QString const& ext);
+bool setStrategy(QString const& ext);
 
 #endif // FILESTRATEGY_H
