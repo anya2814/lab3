@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FileWidget_t {
-    QByteArrayData data[8];
-    char stringdata0[112];
+    QByteArrayData data[11];
+    char stringdata0[157];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,18 +32,23 @@ struct qt_meta_stringdata_FileWidget_t {
 static const qt_meta_stringdata_FileWidget_t qt_meta_stringdata_FileWidget = {
     {
 QT_MOC_LITERAL(0, 0, 10), // "FileWidget"
-QT_MOC_LITERAL(1, 11, 22), // "selectionChangedSignal"
-QT_MOC_LITERAL(2, 34, 0), // ""
-QT_MOC_LITERAL(3, 35, 14), // "QItemSelection"
-QT_MOC_LITERAL(4, 50, 8), // "selected"
-QT_MOC_LITERAL(5, 59, 10), // "deselected"
-QT_MOC_LITERAL(6, 70, 20), // "selectionChangedSlot"
-QT_MOC_LITERAL(7, 91, 20) // "PBcatalogClickedSlot"
+QT_MOC_LITERAL(1, 11, 18), // "fileSelectedSignal"
+QT_MOC_LITERAL(2, 30, 0), // ""
+QT_MOC_LITERAL(3, 31, 29), // "std::shared_ptr<IOCContainer>"
+QT_MOC_LITERAL(4, 61, 8), // "injector"
+QT_MOC_LITERAL(5, 70, 9), // "QFileInfo"
+QT_MOC_LITERAL(6, 80, 20), // "selectionChangedSlot"
+QT_MOC_LITERAL(7, 101, 14), // "QItemSelection"
+QT_MOC_LITERAL(8, 116, 8), // "selected"
+QT_MOC_LITERAL(9, 125, 10), // "deselected"
+QT_MOC_LITERAL(10, 136, 20) // "PBcatalogClickedSlot"
 
     },
-    "FileWidget\0selectionChangedSignal\0\0"
+    "FileWidget\0fileSelectedSignal\0\0"
+    "std::shared_ptr<IOCContainer>\0injector\0"
+    "QFileInfo\0selectionChangedSlot\0"
     "QItemSelection\0selected\0deselected\0"
-    "selectionChangedSlot\0PBcatalogClickedSlot"
+    "PBcatalogClickedSlot"
 };
 #undef QT_MOC_LITERAL
 
@@ -65,13 +70,13 @@ static const uint qt_meta_data_FileWidget[] = {
 
  // slots: name, argc, parameters, tag, flags
        6,    2,   34,    2, 0x08 /* Private */,
-       7,    0,   39,    2, 0x08 /* Private */,
+      10,    0,   39,    2, 0x08 /* Private */,
 
  // signals: parameters
-    QMetaType::Void, 0x80000000 | 3, 0x80000000 | 3,    4,    5,
+    QMetaType::Void, 0x80000000 | 3, 0x80000000 | 5,    4,    2,
 
  // slots: parameters
-    QMetaType::Void, 0x80000000 | 3, 0x80000000 | 3,    4,    5,
+    QMetaType::Void, 0x80000000 | 7, 0x80000000 | 7,    8,    9,
     QMetaType::Void,
 
        0        // eod
@@ -83,7 +88,7 @@ void FileWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         auto *_t = static_cast<FileWidget *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->selectionChangedSignal((*reinterpret_cast< const QItemSelection(*)>(_a[1])),(*reinterpret_cast< const QItemSelection(*)>(_a[2]))); break;
+        case 0: _t->fileSelectedSignal((*reinterpret_cast< std::shared_ptr<IOCContainer>(*)>(_a[1])),(*reinterpret_cast< const QFileInfo(*)>(_a[2]))); break;
         case 1: _t->selectionChangedSlot((*reinterpret_cast< const QItemSelection(*)>(_a[1])),(*reinterpret_cast< const QItemSelection(*)>(_a[2]))); break;
         case 2: _t->PBcatalogClickedSlot(); break;
         default: ;
@@ -95,8 +100,7 @@ void FileWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 1:
-            case 0:
-                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QItemSelection >(); break;
+                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QFileInfo >(); break;
             }
             break;
         case 1:
@@ -111,8 +115,8 @@ void FileWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (FileWidget::*)(const QItemSelection & , const QItemSelection & );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FileWidget::selectionChangedSignal)) {
+            using _t = void (FileWidget::*)(std::shared_ptr<IOCContainer> , QFileInfo const & );
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FileWidget::fileSelectedSignal)) {
                 *result = 0;
                 return;
             }
@@ -161,7 +165,7 @@ int FileWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void FileWidget::selectionChangedSignal(const QItemSelection & _t1, const QItemSelection & _t2)
+void FileWidget::fileSelectedSignal(std::shared_ptr<IOCContainer> _t1, QFileInfo const & _t2)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);

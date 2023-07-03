@@ -21,8 +21,8 @@ signals:
     void dataChanged();
     void dataReadFailed(QString const&);
 public slots:
-    void dataChangedSlot();
-    void dataReadFailedSlot(QString const&);
+    void dataChangedSlot() {};
+    void dataReadFailedSlot(QString const&) {};
 private slots:
     void CBtypeChosenSlot() {};
     void PBprintPDFSlot() {};

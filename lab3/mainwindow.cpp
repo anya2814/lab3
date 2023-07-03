@@ -57,12 +57,12 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::fileSelectedMWSlot(std::shared_ptr<IOCContainer> injector, QFileInfo const& file)
 {
-    setStrategy(injector, file.suffix());
-    injector->RegisterInstance<IChartData, SQLiteData>();
+    QString ext = file.suffix();
+    setStrategy(injector, ext);
     auto readingStrategy = injector->GetObject<IChartData>();
 
-    if (readingStrategy->read(file.absoluteFilePath(), this->m_chartData)) {
+    /*if (readingStrategy->read(file.absoluteFilePath(), this->m_chartData)) {
         emit MainWindow::dataChangedSignal();
     }
-    else emit MainWindow::dataReadFailedSignal("");
+    else emit MainWindow::dataReadFailedSignal("");*/
 }

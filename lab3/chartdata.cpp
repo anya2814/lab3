@@ -63,9 +63,11 @@ bool SQLiteData::read(const QString& path, DataVector fileData)
     return 1;
 }
 
-bool setStrategy(std::shared_ptr<IOCContainer>& injector, QString const& ext)
+bool setStrategy(std::shared_ptr<IOCContainer> injector, QString const& ext)
 {
     if (ext == FILE_EXT[0]) { injector->RegisterInstance<IChartData, JSONData>(); return 1; }
-    if (ext == FILE_EXT[1]) { injector->RegisterInstance<IChartData, SQLiteData>(); return 1; }
+    if (ext == FILE_EXT[1]) {
+        injector->RegisterInstance<IChartData, SQLiteData>();
+        return 1; }
     return 0;
 }
