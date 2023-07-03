@@ -21,6 +21,7 @@ static inline int countTypes = 2;
 class ChartsTemplate
 {
 public:
+    virtual bool setChart(QChart* chart, DataVector const& data);
     virtual bool createChart(QChart* chart, DataVector const& data) = 0;
 };
 
@@ -34,5 +35,6 @@ class BarChart: public ChartsTemplate
     bool createChart(QChart* chart, DataVector const& data) override;
 };
 
+bool setChartType(QString const& type);
 
 #endif // CHARTSTEMPLATE_H

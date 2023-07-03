@@ -1,14 +1,19 @@
 #include "chartstemplate.h"
 
-/*QString typeAsString(EChartType type){
-    QString s;
-    switch (type) {
-        case EChartType::Pie: s = "Pie"; break;
-        case EChartType::Bar: s = "Bar"; break;
-        default: s = ""; break;
-    }
-    return s;
-}*/
+bool setChartType(QString const& type) {
+    IOCContainer injector;
+    if (type == CHART_TYPE[0]) { injector.RegisterInstance<ChartsTemplate, PieChart>(); return 1; }
+    if (type == CHART_TYPE[1]) { injector.RegisterInstance<ChartsTemplate, BarChart>(); return 1; }
+    return 0;
+}
+
+bool ChartsTemplate::setChart(QChart* chart, DataVector const& data) {
+    chart->removeAllSeries();
+
+    if (!createChart(chart, data)) return 0;
+
+    return 1;
+}
 
 bool BarChart::createChart(QChart* chart, DataVector const& data) {
     QBarSeries *series = new QBarSeries(chart);

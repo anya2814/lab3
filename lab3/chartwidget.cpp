@@ -23,14 +23,14 @@ ChartWidget::ChartWidget(QWidget *parent, DataVector const& data)
             m_typeComboBox->addItem(CHART_TYPE[i]);
         }
 
-    // тут надо обновить вывод на дефолтный тип графика
+    setChartType(CHART_TYPE[0]);
     m_chartType = EChartType(0);
 
     m_typeComboBox->setDisabled(true);
     m_colorbwCheckBox->setDisabled(true);
     m_PDFPushButton->setDisabled(true);
 
-    m_chartView->setRenderHint(QPainter::Antialiasing);
+    //m_chartView->setRenderHint(QPainter::Antialiasing);
     m_chartView->setFrameStyle(QFrame::StyledPanel);
     m_chartView->setChart(chart);
 

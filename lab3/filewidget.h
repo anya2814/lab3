@@ -11,6 +11,8 @@
 #include <QFileDialog>
 #include <QStatusBar>
 #include <QModelIndex>
+#include <QLabel>
+#include <memory>
 
 #include "chartdata.h"
 
@@ -24,7 +26,7 @@ private slots:
     void selectionChangedSlot(const QItemSelection& selected, const QItemSelection& deselected);
     void PBcatalogClickedSlot();
 signals:
-    void selectionChangedSignal(const QItemSelection& selected, const QItemSelection& deselected);
+    void fileSelectedSignal(std::shared_ptr<IOCContainer> injector, QFileInfo const&);
 private:
     QFileSystemModel *m_tableModel;
     QTableView *m_tableView;

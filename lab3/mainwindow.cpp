@@ -43,11 +43,26 @@ MainWindow::MainWindow(QWidget *parent)
     QSplitter *splitter = new QSplitter(this);
     m_chartWidget = new ChartWidget (this, m_chartData);
     m_fileWidget = new FileWidget(this);
-    setGeometry(100, 100, 1500, 500);
+    setGeometry(100, 100, 1300, 600);
 
     splitter->addWidget(m_fileWidget);
     splitter->addWidget(m_chartWidget);
 
     setCentralWidget(splitter);
+
+    QObject::connect(m_fileWidget, &FileWidget::fileSelectedSignal, this, &MainWindow::fileSelectedMWSlot);
+    QObject::connect(this, &MainWindow::dataChangedSignal, m_chartWidget, &ChartWidget::dataChangedSlot);
+    QObject::connect(this, &MainWindow::dataReadFailedSignal, m_chartWidget, &ChartWidget::dataReadFailedSlot);
 }
 
+void MainWindow::fileSelectedMWSlot(std::shared_ptr<IOCContainer> injector, QFileInfo const& file)
+{
+    setStrategy(injector, file.suffix());
+    injector->RegisterInstance<IChartData, SQLiteData>();
+    auto readingStrategy = injector->GetObject<IChartData>();
+
+    if (readingStrategy->read(file.absoluteFilePath(), this->m_chartData)) {
+        emit MainWindow::dataChangedSignal();
+    }
+    else emit MainWindow::dataReadFailedSignal("");
+}

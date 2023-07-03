@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ChartWidget_t {
     QByteArrayData data[4];
-    char stringdata0[37];
+    char stringdata0[45];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,12 +32,13 @@ struct qt_meta_stringdata_ChartWidget_t {
 static const qt_meta_stringdata_ChartWidget_t qt_meta_stringdata_ChartWidget = {
     {
 QT_MOC_LITERAL(0, 0, 11), // "ChartWidget"
-QT_MOC_LITERAL(1, 12, 12), // "CBTypeChosen"
-QT_MOC_LITERAL(2, 25, 0), // ""
-QT_MOC_LITERAL(3, 26, 10) // "PBPrintPDF"
+QT_MOC_LITERAL(1, 12, 16), // "CBtypeChosenSlot"
+QT_MOC_LITERAL(2, 29, 0), // ""
+QT_MOC_LITERAL(3, 30, 14) // "PBprintPDFSlot"
 
     },
-    "ChartWidget\0CBTypeChosen\0\0PBPrintPDF"
+    "ChartWidget\0CBtypeChosenSlot\0\0"
+    "PBprintPDFSlot"
 };
 #undef QT_MOC_LITERAL
 
@@ -71,8 +72,8 @@ void ChartWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         auto *_t = static_cast<ChartWidget *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->CBTypeChosen(); break;
-        case 1: _t->PBPrintPDF(); break;
+        case 0: _t->CBtypeChosenSlot(); break;
+        case 1: _t->PBprintPDFSlot(); break;
         default: ;
         }
     }

@@ -2,12 +2,14 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QObject>
 #include <QtCharts/QChartGlobal>
+#include <memory>
 #include "chartdata.h"
 #include "chartwidget.h"
 #include "filewidget.h"
 
-QT_CHARTS_USE_NAMESPACE
+#undef GetObject;
 
 class MainWindow : public QMainWindow
 {
@@ -15,6 +17,11 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow() = default;
+public slots:
+    void fileSelectedMWSlot(std::shared_ptr<IOCContainer> injector, QFileInfo const&);
+signals:
+    void dataChangedSignal();
+    void dataReadFailedSignal(QString const&);
 private:
     DataVector m_chartData;
     ChartWidget *m_chartWidget;

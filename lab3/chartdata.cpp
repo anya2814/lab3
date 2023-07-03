@@ -1,6 +1,6 @@
 #include "chartdata.h"
 
-bool JSONData::read(DataVector fileData, const QString path)
+bool JSONData::read(const QString& path, DataVector fileData)
 {
     /*QFile file = QFile(path);
     fileData = DataMap();
@@ -10,7 +10,7 @@ bool JSONData::read(DataVector fileData, const QString path)
     return 0;
 }
 
-bool SQLiteData::read(DataVector fileData, const QString path)
+bool SQLiteData::read(const QString& path, DataVector fileData)
 {
     if (!QFile::exists(path)) return 0;
     fileData = DataVector();
@@ -61,4 +61,11 @@ bool SQLiteData::read(DataVector fileData, const QString path)
 
     dbase.close();
     return 1;
+}
+
+bool setStrategy(std::shared_ptr<IOCContainer>& injector, QString const& ext)
+{
+    if (ext == FILE_EXT[0]) { injector->RegisterInstance<IChartData, JSONData>(); return 1; }
+    if (ext == FILE_EXT[1]) { injector->RegisterInstance<IChartData, SQLiteData>(); return 1; }
+    return 0;
 }

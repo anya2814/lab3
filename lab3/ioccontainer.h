@@ -8,6 +8,8 @@
 #include <string>
 using namespace std;
 
+#undef GetObject;
+
 class IOCContainer
 {
     static int s_nextTypeId;
@@ -114,8 +116,5 @@ public:
         RegisterInstance<TInterface>(std::make_shared<TConcrete>(GetObject<TArguments>()...));
     }
 };
-
-// инициализируем ненулевым числом
-//int IOCContainer::s_nextTypeId = 115094801;
 
 #endif // IOCCONTAINER_H

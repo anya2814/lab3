@@ -1,6 +1,8 @@
 #ifndef FILESTRATEGY_H
 #define FILESTRATEGY_H
 
+#include<QString>
+
 #include<QFile>
 #include<QIODevice>
 #include<QTextStream>
@@ -15,6 +17,8 @@
 #include<QSqlDatabase>
 #include<QSqlQuery>
 
+#include"ioccontainer.h"
+
 typedef QPair<QString, QString> Data;
 typedef QList<Data> DataVector;
 
@@ -25,20 +29,22 @@ static inline int countFileExt = 2;
 class IChartData
 {
 public:
-    virtual bool read(DataVector fileData, const QString path) = 0;
+    virtual bool read(const QString& path, DataVector fileData) = 0;
     virtual ~IChartData() = default;
 };
 
 class JSONData: public IChartData
 {
 public:
-    bool read(DataVector fileData, const QString path) override;
+    bool read(const QString& path, DataVector fileData) override;
 };
 
 class SQLiteData: public IChartData
 {
 public:
-    bool read(DataVector fileData, const QString path) override;
+    bool read(const QString& path, DataVector fileData) override;
 };
+
+bool setStrategy(std::shared_ptr<IOCContainer> injector, QString const& ext);
 
 #endif // FILESTRATEGY_H

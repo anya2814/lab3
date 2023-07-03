@@ -31,7 +31,8 @@ SOURCES += \
     chartstemplate.cpp \
     chartdata.cpp \
     filewidget.cpp \
-    chartwidget.cpp
+    chartwidget.cpp \
+    ioccontainer.cpp
 
 HEADERS += \
         mainwindow.h \

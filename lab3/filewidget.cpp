@@ -19,18 +19,27 @@ FileWidget::FileWidget(QWidget *parent): QWidget(parent)
         filters << "*." + FILE_EXT[i];
     m_tableModel->setNameFilters(filters);
     m_tableModel->setRootPath(QDir::currentPath());
+    QHBoxLayout *hlayout1 = new QHBoxLayout();
+    QHBoxLayout *hlayout2 = new QHBoxLayout();
     QVBoxLayout *vlayout = new QVBoxLayout(this);
 
-    m_tableView = new QTableView;
+    m_tableView = new QTableView(this);
     m_tableView->setModel(m_tableModel);
     m_tableView->setRootIndex(m_tableModel->index(QDir::currentPath()));
     m_tableView->setMinimumSize(425, 400);
 
-    m_catalogPushButton->setText("Выбранный путь: " + QDir::currentPath());
+    QLabel *pathLabel = new QLabel("Выбранный путь:");
+    pathLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+
+    m_catalogPushButton->setText(QDir::currentPath());
     m_catalogPushButton->setMinimumWidth(80);
 
-    vlayout->addWidget(m_catalogPushButton);
-    vlayout->addWidget(m_tableView);
+    hlayout1->addWidget(pathLabel);
+    hlayout1->addWidget(m_catalogPushButton);
+    hlayout2->addWidget(m_tableView);
+
+    vlayout->addLayout(hlayout1);
+    vlayout->addLayout(hlayout2);
 
     QItemSelectionModel *selectionModel = m_tableView->selectionModel();
     QObject::connect(selectionModel, &QItemSelectionModel::selectionChanged, this, &FileWidget::selectionChangedSlot);
@@ -39,8 +48,8 @@ FileWidget::FileWidget(QWidget *parent): QWidget(parent)
 
 void FileWidget::selectionChangedSlot(const QItemSelection& selected, const QItemSelection& deselected) {
     if (deselected == selected) return;
-
-    //emit fileSelectedSignal(m_tableModel->index(QDir::currentPath()));
+    std::shared_ptr<IOCContainer>;
+    emit fileSelectedSignal(injector, m_tableModel->index(QDir::currentPath()));
 }
 
 void FileWidget::PBcatalogClickedSlot() {
@@ -48,7 +57,7 @@ void FileWidget::PBcatalogClickedSlot() {
         if (!directory.isEmpty()) {
             m_tableModel->setRootPath(directory);
             m_tableView->setRootIndex(m_tableModel->index(directory));
-            m_catalogPushButton->setText("Выбранный путь: " + directory);
+            m_catalogPushButton->setText(directory);
         }
 }
 
