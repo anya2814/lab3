@@ -13,12 +13,9 @@ ChartWidget::ChartWidget(QWidget *parent, DataVector const& data)
     QChart *chart = new QChart;
 
     chart->layout()->setContentsMargins(0, 0, 0, 0);
-
     m_chartView->setMinimumSize(QSize(700, 500));
 
-    m_typeComboBox->setEditable(false);
     m_typeComboBox->setMinimumWidth(80);
-
     for (int i = 0; i < (int) countTypes; i++) {
             m_typeComboBox->addItem(CHART_TYPE[i]);
         }
@@ -30,7 +27,7 @@ ChartWidget::ChartWidget(QWidget *parent, DataVector const& data)
     m_colorbwCheckBox->setDisabled(true);
     m_PDFPushButton->setDisabled(true);
 
-    //m_chartView->setRenderHint(QPainter::Antialiasing);
+    m_chartView->setRenderHint(QPainter::Antialiasing);
     m_chartView->setFrameStyle(QFrame::StyledPanel);
     m_chartView->setChart(chart);
 

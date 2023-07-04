@@ -30,7 +30,7 @@ private:
     void drawChart();
 
     QChartView *m_chartView;
-    DataVector m_data;
+    DataVector const& m_data;
     QComboBox *m_typeComboBox;
     QCheckBox *m_colorbwCheckBox;
     QPushButton *m_PDFPushButton;

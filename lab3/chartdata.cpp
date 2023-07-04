@@ -1,6 +1,6 @@
 #include "chartdata.h"
 
-bool JSONData::read(const QString& path, DataVector fileData)
+bool JSONData::read(const QString& path, DataVector& fileData)
 {
     /*QFile file = QFile(path);
     fileData = DataMap();
@@ -10,7 +10,7 @@ bool JSONData::read(const QString& path, DataVector fileData)
     return 0;
 }
 
-bool SQLiteData::read(const QString& path, DataVector fileData)
+bool SQLiteData::read(const QString& path, DataVector& fileData)
 {
     if (!QFile::exists(path)) return 0;
     fileData = DataVector();

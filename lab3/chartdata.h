@@ -2,6 +2,7 @@
 #define FILESTRATEGY_H
 
 #include<QString>
+#include<memory>
 
 #include<QFile>
 #include<QIODevice>
@@ -29,20 +30,20 @@ static inline int countFileExt = 2;
 class IChartData
 {
 public:
-    virtual bool read(const QString& path, DataVector fileData) = 0;
+    virtual bool read(const QString& path, DataVector& fileData) = 0;
     virtual ~IChartData() = default;
 };
 
 class JSONData: public IChartData
 {
 public:
-    bool read(const QString& path, DataVector fileData) override;
+    bool read(const QString& path, DataVector& fileData) override;
 };
 
 class SQLiteData: public IChartData
 {
 public:
-    bool read(const QString& path, DataVector fileData) override;
+    bool read(const QString& path, DataVector& fileData) override;
 };
 
 bool setStrategy(QString const& ext);

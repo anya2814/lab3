@@ -62,7 +62,7 @@ void MainWindow::fileSelectedMWSlot(QFileInfo const& file)
     setStrategy(ext);
     auto readingStrategy = injector.GetObject<IChartData>();
 
-    if (readingStrategy->read(file.absoluteFilePath(), this->m_chartData)) {
+    if (readingStrategy->read(file.absoluteFilePath(), m_chartData)) {
         emit MainWindow::dataChangedSignal();
     }
     else emit MainWindow::dataReadFailedSignal("");
