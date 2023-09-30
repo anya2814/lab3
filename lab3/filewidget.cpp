@@ -1,48 +1,39 @@
 #include "filewidget.h"
 
-#include <QVBoxLayout>
-#include <QListView>
-#include <QTreeView>
-#include <QFileSystemModel>
-#include <QItemSelectionModel>
-#include <QTableView>
-#include <QHeaderView>
-#include <QStatusBar>
-
 FileWidget::FileWidget(QWidget *parent): QWidget(parent)
 {
     m_catalogPushButton = new QPushButton(this);
-    m_tableModel = new QFileSystemModel(this);
-    m_tableModel->setFilter(QDir::NoDotAndDotDot | QDir::Files);
+    m_tableModel = new QFileSystemModel(this);  // модель файловой системы
+    m_tableModel->setFilter(QDir::Files);       // только файлы показываются в таблице
     QStringList filters;
-    for (int i = 0; i < countFileExt; i++)
+    for (int i = 0; i < FILE_EXT.size(); i++)   // только удовл. фильтрам файлы активны
         filters << "*." + FILE_EXT[i];
     m_tableModel->setNameFilters(filters);
     m_tableModel->setRootPath(QDir::currentPath());
-    QHBoxLayout *hlayout1 = new QHBoxLayout();
-    QHBoxLayout *hlayout2 = new QHBoxLayout();
+    QHBoxLayout *hlayout = new QHBoxLayout();
     QVBoxLayout *vlayout = new QVBoxLayout(this);
 
-    m_tableView = new QTableView(this);
+    m_tableView = new QTableView();             // представление модели в виде таблицы
     m_tableView->setModel(m_tableModel);
     m_tableView->setRootIndex(m_tableModel->index(QDir::currentPath()));
     m_tableView->setMinimumSize(425, 400);
 
     QLabel *pathLabel = new QLabel("Выбранный путь:");
-    pathLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
     m_catalogPushButton->setText(QDir::currentPath());
     m_catalogPushButton->setMinimumWidth(80);
 
-    hlayout1->addWidget(pathLabel);
-    hlayout1->addWidget(m_catalogPushButton);
-    hlayout2->addWidget(m_tableView);
+    hlayout->addWidget(pathLabel);
+    hlayout->addWidget(m_catalogPushButton);
+    hlayout->setAlignment(Qt::AlignLeft );
 
-    vlayout->addLayout(hlayout1);
-    vlayout->addLayout(hlayout2);
+    vlayout->addLayout(hlayout);
+    vlayout->addWidget(m_tableView);
 
     QItemSelectionModel *selectionModel = m_tableView->selectionModel();
+    // сигнал о выборе файла в таблице
     QObject::connect(selectionModel, &QItemSelectionModel::selectionChanged, this, &FileWidget::selectionChangedSlot);
+    // сигнал о нажатии кнопки выбора каталога с файлами
     QObject::connect(m_catalogPushButton, &QPushButton::clicked, this, &FileWidget::PBcatalogClickedSlot);
 }
 
@@ -52,7 +43,7 @@ void FileWidget::selectionChangedSlot(const QItemSelection& selected, const QIte
 }
 
 void FileWidget::PBcatalogClickedSlot() {
-    auto directory = QFileDialog::getExistingDirectory();
+    QString directory = QFileDialog::getExistingDirectory();
         if (!directory.isEmpty()) {
             m_tableModel->setRootPath(directory);
             m_tableView->setRootIndex(m_tableModel->index(directory));

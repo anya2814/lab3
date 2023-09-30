@@ -1,21 +1,22 @@
-#ifndef FILEVIEW_H
-#define FILEVIEW_H
+#ifndef FILEWIDGET_H
+#define FILEWIDGET_H
 
 #include <QMainWindow>
 #include <QWidget>
 #include <QObject>
+
 #include <QFileSystemModel>
-#include <QTreeView>
 #include <QTableView>
-#include <QPushButton>
 #include <QFileDialog>
-#include <QStatusBar>
+#include <QItemSelectionModel>
 #include <QModelIndex>
+
 #include <QLabel>
-#include <memory>
+#include <QPushButton>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
 
 #include "chartdata.h"
-#include "chartstemplate.h"
 
 class FileWidget : public QWidget
 {
@@ -34,4 +35,4 @@ private:
     QPushButton *m_catalogPushButton;
 };
 
-#endif // FILEVIEW_H
+#endif // FILEWIDGET_H

@@ -6,23 +6,16 @@
 #include <QtCharts/QtCharts>
 #include <QtCharts/QChart>
 
-#include <QtCharts/QStackedBarSeries>
-#include <QtCharts/QBarSeries>
-#include <QtCharts/QBarSet>
-#include <QtCharts/QLegend>
-#include <QtCharts/QBarCategoryAxis>
-
 #include "chartdata.h"
 
-enum class EChartType {Pie = 0, Bar = 1};
-static inline QVector<QString> CHART_TYPE {"Pie", "Bar"};
-static inline int countTypes = 2;
+static inline QVector<QString> CHART_TYPE {"Pie", "Bar"};   // поддерж. типы графиков
 
-class ChartsTemplate
+class ChartsTemplate        // шаблон для графиков
 {
 public:
-    virtual bool setChart(QChart* chart, DataVector const& data);
-    virtual bool createChart(QChart* chart, DataVector const& data) = 0;
+    bool setChart(QChart* chart, DataVector const& data);       // шаблонный метод для замены и установки графика
+    virtual bool createChart(QChart* chart, DataVector const& data) = 0;  // метод для рисования графика
+    virtual ~ChartsTemplate() = default;
 };
 
 class PieChart: public ChartsTemplate
@@ -35,6 +28,6 @@ class BarChart: public ChartsTemplate
     bool createChart(QChart* chart, DataVector const& data) override;
 };
 
-bool setChartType(QString const& type);
+bool setChartType(QString const& type);     // выбор типа графика с помощью IOC контейнера
 
 #endif // CHARTSTEMPLATE_H

@@ -3,9 +3,7 @@
 
 #include <QMainWindow>
 #include <QObject>
-#include <QtCharts/QChartGlobal>
-#include <memory>
-#include "chartdata.h"
+
 #include "chartwidget.h"
 #include "filewidget.h"
 

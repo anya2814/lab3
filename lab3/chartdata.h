@@ -1,13 +1,10 @@
-#ifndef FILESTRATEGY_H
-#define FILESTRATEGY_H
+#ifndef CHARTDATA_H
+#define CHARTDATA_H
 
-#include<QString>
 #include<memory>
-
-#include<QFile>
-#include<QIODevice>
-#include<QTextStream>
 #include<QString>
+#include<QFile>
+#include<QTextStream>
 #include<QVector>
 
 #include<QJsonDocument>
@@ -23,29 +20,27 @@
 typedef QPair<QString, QString> Data;
 typedef QList<Data> DataVector;
 
-enum class EFileExt {JSON, SQLite};
-static inline QVector<QString> FILE_EXT = { "json", "sqlite"};
-static inline int countFileExt = 2;
+static inline QVector<QString> FILE_EXT = {"json", "sqlite"};   // поддерж. типы расширений файлов
 
-class IChartData
+class IChartData            // стратегия чтения файлов
 {
 public:
-    virtual bool read(const QString& path, DataVector& fileData) = 0;
+    virtual bool read(const QString& path, DataVector& fileData) = 0;   // виртуальная функция для чтения данных в filedata из файла с путем path
     virtual ~IChartData() = default;
 };
 
-class JSONData: public IChartData
+class JSONData: public IChartData       // чтение файлов формата json
 {
 public:
     bool read(const QString& path, DataVector& fileData) override;
 };
 
-class SQLiteData: public IChartData
+class SQLiteData: public IChartData     // чтение файлов формата sqlite
 {
 public:
     bool read(const QString& path, DataVector& fileData) override;
 };
 
-bool setStrategy(QString const& ext);
+bool setStrategy(QString const& ext);   // выбор стратегии с помощью IOC контейнера
 
-#endif // FILESTRATEGY_H
+#endif // CHARTDATA_H

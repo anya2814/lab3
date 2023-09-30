@@ -7,31 +7,34 @@ bool JSONData::read(const QString& path, DataVector& fileData)
     //проверка, открылся ли файл
     if (!file.exists() || !file.open(QIODeviceBase::ReadOnly)) return 0;
 */
-    return 0;
+    return false;
 }
 
 bool SQLiteData::read(const QString& path, DataVector& fileData)
 {
-    if (!QFile::exists(path)) return 0;
+    if (!QFile::exists(path)) return false;
     fileData = DataVector();
 
-    QSqlDatabase dbase = QSqlDatabase::addDatabase("QSQLITE");
-    dbase.setDatabaseName(path);
-    if (!dbase.open()) return 0;
+    QSqlDatabase dbase = QSqlDatabase::addDatabase("QSQLITE");  // создаем соединение
+    dbase.setDatabaseName(path);                                // конкретизируем
+    if (!dbase.open()) return false;                            // открываем базу данных
 
     QSqlQuery query;
+
+    // создаем запрос
     QString tableName = dbase.tables().first();
     QString str = "SELECT * FROM " + tableName;
     query = QSqlQuery(str);
-    if (!query.next()) { dbase.close(); return 0; }
+    if (!query.next()) { dbase.close(); return false; }
 
-    auto prevDate = query.value(0).toString().split(' ').first().split('.');
-    auto prevValue = query.value(1).toFloat();
+    auto startDate = query.value(0).toString().split(' ').first().split('.');
+    auto startValue = query.value(1).toFloat();
 
-    auto prevMonth = prevDate.at(1).toInt();
-    auto prevYear = prevDate.at(2).toInt();
+    // запоминаем месяц и год первые в группе
+    auto startMonth = startDate.at(1).toInt();
+    auto startYear = startDate.at(2).toInt();
 
-    float averageValue = prevValue;
+    float averageValue = startValue;
     int n = 1;
 
     while (query.next()) {
@@ -41,34 +44,30 @@ bool SQLiteData::read(const QString& path, DataVector& fileData)
     auto month = date.at(1).toInt();
     auto year = date.at(2).toInt();
 
-
-    if (year == prevYear && month == prevMonth) {
+    // группируем данные по месяцам годов
+    if (year == startYear && month == startMonth) {
         n += 1;
         averageValue += value;
     }
     else {
         averageValue = averageValue/ (n*(1.0));
-        QString monthNum = QString::number(prevMonth);
-        Data d(QString::number(prevYear) + "." + monthNum, QString::number(averageValue));
+        Data d(QString::number(startYear) + "." + QString::number(startMonth), QString::number(averageValue));
         fileData.push_back(d);
 
         averageValue = value;
-        prevYear = year;
-        prevMonth = month;
+        startYear = year;
+        startMonth = month;
         n = 1;
     }
     }
 
     dbase.close();
-    return 1;
+    return true;
 }
 
 bool setStrategy(QString const& ext)
 {
-    //IOCContainer injector;
     if (ext == FILE_EXT[0]) { injector.RegisterInstance<IChartData, JSONData>(); return 1; }
-    if (ext == FILE_EXT[1]) {
-        injector.RegisterInstance<IChartData, SQLiteData>();
-        return 1; }
-    return 0;
+    if (ext == FILE_EXT[1]) { injector.RegisterInstance<IChartData, SQLiteData>(); return 1; }
+    return false;
 }

@@ -1,17 +1,11 @@
 #include "chartstemplate.h"
 
-bool setChartType(QString const& type) {
-    if (type == CHART_TYPE[0]) { injector.RegisterInstance<ChartsTemplate, PieChart>(); return 1; }
-    if (type == CHART_TYPE[1]) { injector.RegisterInstance<ChartsTemplate, BarChart>(); return 1; }
-    return 0;
-}
-
 bool ChartsTemplate::setChart(QChart* chart, DataVector const& data) {
     chart->removeAllSeries();
 
-    if (!createChart(chart, data)) return 0;
+    if (!createChart(chart, data)) return false;  // рисуем график
 
-    return 1;
+    return true;
 }
 
 bool BarChart::createChart(QChart* chart, DataVector const& data) {
@@ -23,17 +17,16 @@ bool BarChart::createChart(QChart* chart, DataVector const& data) {
 
         if(ok) {
             QBarSet *set = new QBarSet(t.first);
-            series->append(set);
             set->append(value);
             series->append(set);
         }
-        else return 0;
+        else return false;
     }
 
     chart->addSeries(series);
     chart->createDefaultAxes();
 
-    return 1;
+    return true;
 }
 
 bool PieChart::createChart(QChart* chart, DataVector const& data) {
@@ -49,7 +42,12 @@ bool PieChart::createChart(QChart* chart, DataVector const& data) {
     }
 
     chart->addSeries(series);
-    chart->legend()->show();
 
-    return 1;
+    return true;
+}
+
+bool setChartType(QString const& type) {
+    if (type == CHART_TYPE[0]) { injector.RegisterInstance<ChartsTemplate, PieChart>(); return 1; }
+    if (type == CHART_TYPE[1]) { injector.RegisterInstance<ChartsTemplate, BarChart>(); return 1; }
+    return 0;
 }

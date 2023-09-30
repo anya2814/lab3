@@ -1,5 +1,5 @@
-#ifndef CHARTVIEW_H
-#define CHARTVIEW_H
+#ifndef CHARTWIDGET_H
+#define CHARTWIDGET_H
 
 #include <QWidget>
 #include <QObject>
@@ -20,15 +20,12 @@ class ChartWidget: public QWidget
 public:
     ChartWidget(QWidget* parent, DataVector const& data);
 public slots:
-    void dataChangedSlot();
+    void drawChartSlot();
     void dataReadFailedSlot(QString const&);
 private slots:
-    void CBtypeChangedSlot(EChartType type);
     void PBprintPDFSlot();
-    void CBchartTypeIndexChangedSlot(int empty);
+    void CBchartTypeChangedSlot(int empty);
 private:
-    void drawChart();
-
     QChartView *m_chartView;
     DataVector const& m_data;
     QComboBox *m_typeComboBox;
@@ -36,7 +33,7 @@ private:
     QPushButton *m_PDFPushButton;
     QStackedWidget *m_sharedView;
 
-    EChartType m_chartType;
+    QString m_chartType;
 };
 
-#endif // CHARTVIEW_H
+#endif // CHARTWIDGET_H
