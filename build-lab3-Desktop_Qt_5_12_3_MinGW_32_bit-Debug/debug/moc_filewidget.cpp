@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FileWidget_t {
     QByteArrayData data[9];
-    char stringdata0[118];
+    char stringdata0[113];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -35,16 +35,16 @@ QT_MOC_LITERAL(0, 0, 10), // "FileWidget"
 QT_MOC_LITERAL(1, 11, 18), // "fileSelectedSignal"
 QT_MOC_LITERAL(2, 30, 0), // ""
 QT_MOC_LITERAL(3, 31, 9), // "QFileInfo"
-QT_MOC_LITERAL(4, 41, 20), // "selectionChangedSlot"
-QT_MOC_LITERAL(5, 62, 14), // "QItemSelection"
-QT_MOC_LITERAL(6, 77, 8), // "selected"
-QT_MOC_LITERAL(7, 86, 10), // "deselected"
-QT_MOC_LITERAL(8, 97, 20) // "PBcatalogClickedSlot"
+QT_MOC_LITERAL(4, 41, 18), // "currentChangedSlot"
+QT_MOC_LITERAL(5, 60, 11), // "QModelIndex"
+QT_MOC_LITERAL(6, 72, 8), // "selected"
+QT_MOC_LITERAL(7, 81, 10), // "deselected"
+QT_MOC_LITERAL(8, 92, 20) // "PBcatalogClickedSlot"
 
     },
     "FileWidget\0fileSelectedSignal\0\0QFileInfo\0"
-    "selectionChangedSlot\0QItemSelection\0"
-    "selected\0deselected\0PBcatalogClickedSlot"
+    "currentChangedSlot\0QModelIndex\0selected\0"
+    "deselected\0PBcatalogClickedSlot"
 };
 #undef QT_MOC_LITERAL
 
@@ -85,7 +85,7 @@ void FileWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->fileSelectedSignal((*reinterpret_cast< const QFileInfo(*)>(_a[1]))); break;
-        case 1: _t->selectionChangedSlot((*reinterpret_cast< const QItemSelection(*)>(_a[1])),(*reinterpret_cast< const QItemSelection(*)>(_a[2]))); break;
+        case 1: _t->currentChangedSlot((*reinterpret_cast< const QModelIndex(*)>(_a[1])),(*reinterpret_cast< const QModelIndex(*)>(_a[2]))); break;
         case 2: _t->PBcatalogClickedSlot(); break;
         default: ;
         }
@@ -97,14 +97,6 @@ void FileWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QFileInfo >(); break;
-            }
-            break;
-        case 1:
-            switch (*reinterpret_cast<int*>(_a[1])) {
-            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-            case 1:
-            case 0:
-                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QItemSelection >(); break;
             }
             break;
         }

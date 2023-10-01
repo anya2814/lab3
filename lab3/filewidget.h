@@ -25,7 +25,7 @@ public:
     FileWidget(QWidget *parent = nullptr);
     ~FileWidget();
 private slots:
-    void selectionChangedSlot(const QItemSelection& selected, const QItemSelection& deselected);
+    void currentChangedSlot(const QModelIndex &selected, const QModelIndex &deselected);
     void PBcatalogClickedSlot();
 signals:
     void fileSelectedSignal(QFileInfo const&);

@@ -32,14 +32,15 @@ FileWidget::FileWidget(QWidget *parent): QWidget(parent)
 
     QItemSelectionModel *selectionModel = m_tableView->selectionModel();
     // сигнал о выборе файла в таблице
-    QObject::connect(selectionModel, &QItemSelectionModel::selectionChanged, this, &FileWidget::selectionChangedSlot);
+    QObject::connect(selectionModel, &QItemSelectionModel::currentChanged, this, &FileWidget::currentChangedSlot);
     // сигнал о нажатии кнопки выбора каталога с файлами
     QObject::connect(m_catalogPushButton, &QPushButton::clicked, this, &FileWidget::PBcatalogClickedSlot);
 }
 
-void FileWidget::selectionChangedSlot(const QItemSelection& selected, const QItemSelection& deselected) {
-    if (deselected == selected) return;
-    emit fileSelectedSignal(m_tableModel->fileInfo(selected.indexes().first()));
+void FileWidget::currentChangedSlot(const QModelIndex &selected, const QModelIndex &deselected)
+{
+    Q_UNUSED(deselected);
+    emit fileSelectedSignal(m_tableModel->fileInfo(selected));
 }
 
 void FileWidget::PBcatalogClickedSlot() {
