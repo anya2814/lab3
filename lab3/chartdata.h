@@ -25,20 +25,20 @@ static inline QVector<QString> FILE_EXT = {"json", "sqlite"};   // поддер�
 class IChartData            // стратегия чтения файлов
 {
 public:
-    virtual bool read(const QString& path, DataVector& fileData) = 0;   // виртуальная функция для чтения данных в filedata из файла с путем path
+    virtual bool read(const QString& path, DataVector& fileData, QString &errorMsg) = 0;   // виртуальная функция для чтения данных в filedata из файла с путем path
     virtual ~IChartData() = default;
 };
 
 class JSONData: public IChartData       // чтение файлов формата json
 {
 public:
-    bool read(const QString& path, DataVector& fileData) override;
+    bool read(const QString& path, DataVector& fileData, QString &errorMsg) override;
 };
 
 class SQLiteData: public IChartData     // чтение файлов формата sqlite
 {
 public:
-    bool read(const QString& path, DataVector& fileData) override;
+    bool read(const QString& path, DataVector& fileData, QString &errorMsg) override;
 };
 
 bool setStrategy(QString const& ext);   // выбор стратегии с помощью IOC контейнера

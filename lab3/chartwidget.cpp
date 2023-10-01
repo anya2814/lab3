@@ -8,12 +8,14 @@ ChartWidget::ChartWidget(QWidget *parent, DataVector const& data)
     m_colorbwCheckBox = new QCheckBox;
     m_PDFPushButton = new QPushButton("Сохранить в формате PDF");
     m_sharedView = new QStackedWidget;
+    m_infoLabel = new QLabel("--Выберите файл для чтения--");
     QVBoxLayout *vlayout = new QVBoxLayout(this);
     QHBoxLayout *hlayout = new QHBoxLayout;
     QChart *chart = new QChart;
 
+    m_infoLabel->setAlignment(Qt::AlignCenter);
     chart->layout()->setContentsMargins(0, 0, 0, 0);    // для красоты
-    m_chartView->setMinimumSize(QSize(700, 500));       // минимальный размер
+    m_sharedView->setMinimumSize(QSize(700, 500));       // минимальный размер
 
     m_typeComboBox->setMinimumWidth(80);
     for (int i = 0; i < CHART_TYPE.size(); i++) {
@@ -41,7 +43,9 @@ ChartWidget::ChartWidget(QWidget *parent, DataVector const& data)
     hlayout->addStretch();
     hlayout->addWidget(m_PDFPushButton);
 
+    m_sharedView->addWidget(m_infoLabel);
     m_sharedView->addWidget(m_chartView);
+    m_sharedView->setCurrentWidget(m_infoLabel);
 
     vlayout->addLayout(hlayout);                        // добавляем компоненты в вертикальный компоновщик
     vlayout->addWidget(m_sharedView);
@@ -62,13 +66,17 @@ void ChartWidget::drawChartSlot() {
         m_typeComboBox->setDisabled(true);
         m_PDFPushButton->setDisabled(true);
     }
+
+    m_sharedView->setCurrentWidget(m_chartView);
 }
 
-void ChartWidget::dataReadFailedSlot(QString const&)
+void ChartWidget::dataReadFailedSlot(QString const errorMsg)
 {
     m_typeComboBox->setDisabled(true);
     m_PDFPushButton->setDisabled(true);
     m_colorbwCheckBox->setDisabled(true);
+    m_infoLabel->setText(errorMsg);
+    m_sharedView->setCurrentWidget(m_infoLabel);
 }
 
 void ChartWidget::PBprintPDFSlot() {

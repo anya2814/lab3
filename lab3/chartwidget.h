@@ -21,7 +21,7 @@ public:
     ChartWidget(QWidget* parent, DataVector const& data);
 public slots:
     void drawChartSlot();
-    void dataReadFailedSlot(QString const&);
+    void dataReadFailedSlot(const QString errorMsg);
 private slots:
     void PBprintPDFSlot();
     void CBchartTypeChangedSlot(int empty);
@@ -32,6 +32,7 @@ private:
     QCheckBox *m_colorbwCheckBox;
     QPushButton *m_PDFPushButton;
     QStackedWidget *m_sharedView;
+    QLabel *m_infoLabel;
 
     QString m_chartType;
 };

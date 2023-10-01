@@ -24,12 +24,13 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::fileSelectedMWSlot(QFileInfo const& file)
 {
     QString ext = file.suffix();
+    QString errorMsg;
 
     setStrategy(ext);
     auto readingStrategy = injector.GetObject<IChartData>();
 
-    if (readingStrategy->read(file.absoluteFilePath(), m_chartData)) {
+    if (readingStrategy->read(file.absoluteFilePath(), m_chartData, errorMsg)) {
         emit MainWindow::dataChangedSignal();
     }
-    else emit MainWindow::dataReadFailedSignal("");
+    else emit MainWindow::dataReadFailedSignal(errorMsg);
 }

@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ChartWidget_t {
-    QByteArrayData data[7];
-    char stringdata0[90];
+    QByteArrayData data[8];
+    char stringdata0[99];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -35,13 +35,14 @@ QT_MOC_LITERAL(0, 0, 11), // "ChartWidget"
 QT_MOC_LITERAL(1, 12, 13), // "drawChartSlot"
 QT_MOC_LITERAL(2, 26, 0), // ""
 QT_MOC_LITERAL(3, 27, 18), // "dataReadFailedSlot"
-QT_MOC_LITERAL(4, 46, 14), // "PBprintPDFSlot"
-QT_MOC_LITERAL(5, 61, 22), // "CBchartTypeChangedSlot"
-QT_MOC_LITERAL(6, 84, 5) // "empty"
+QT_MOC_LITERAL(4, 46, 8), // "errorMsg"
+QT_MOC_LITERAL(5, 55, 14), // "PBprintPDFSlot"
+QT_MOC_LITERAL(6, 70, 22), // "CBchartTypeChangedSlot"
+QT_MOC_LITERAL(7, 93, 5) // "empty"
 
     },
     "ChartWidget\0drawChartSlot\0\0"
-    "dataReadFailedSlot\0PBprintPDFSlot\0"
+    "dataReadFailedSlot\0errorMsg\0PBprintPDFSlot\0"
     "CBchartTypeChangedSlot\0empty"
 };
 #undef QT_MOC_LITERAL
@@ -62,14 +63,14 @@ static const uint qt_meta_data_ChartWidget[] = {
  // slots: name, argc, parameters, tag, flags
        1,    0,   34,    2, 0x0a /* Public */,
        3,    1,   35,    2, 0x0a /* Public */,
-       4,    0,   38,    2, 0x08 /* Private */,
-       5,    1,   39,    2, 0x08 /* Private */,
+       5,    0,   38,    2, 0x08 /* Private */,
+       6,    1,   39,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,    2,
+    QMetaType::Void, QMetaType::QString,    4,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,    6,
+    QMetaType::Void, QMetaType::Int,    7,
 
        0        // eod
 };

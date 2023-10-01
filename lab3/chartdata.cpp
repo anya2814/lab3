@@ -1,6 +1,6 @@
 #include "chartdata.h"
 
-bool JSONData::read(const QString& path, DataVector& fileData)
+bool JSONData::read(const QString& path, DataVector& fileData, QString &errorMsg)
 {
     /*QFile file = QFile(path);
     fileData = DataMap();
@@ -10,14 +10,14 @@ bool JSONData::read(const QString& path, DataVector& fileData)
     return false;
 }
 
-bool SQLiteData::read(const QString& path, DataVector& fileData)
+bool SQLiteData::read(const QString& path, DataVector& fileData, QString &errorMsg)
 {
     if (!QFile::exists(path)) return false;
     fileData = DataVector();
 
     QSqlDatabase dbase = QSqlDatabase::addDatabase("QSQLITE");  // создаем соединение
     dbase.setDatabaseName(path);                                // конкретизируем
-    if (!dbase.open()) return false;                            // открываем базу данных
+    if (!dbase.open()) { errorMsg = "--Не удалось открыть файл--"; return false; }  // открываем базу данных
 
     QSqlQuery query;
 
@@ -25,9 +25,10 @@ bool SQLiteData::read(const QString& path, DataVector& fileData)
     QString tableName = dbase.tables().first();
     QString str = "SELECT * FROM " + tableName;
     query = QSqlQuery(str);
-    if (!query.next()) { dbase.close(); return false; }
+    if (!query.next()) { dbase.close(); errorMsg = "--База данных пустая--"; return false; }
 
     auto startDate = query.value(0).toString().split(' ').first().split('.');
+    if (startDate.size() != 3) {errorMsg = "--Неподдерживаемый формат данных--"; return false;  }
     auto startValue = query.value(1).toFloat();
 
     // запоминаем месяц и год первые в группе
@@ -67,7 +68,7 @@ bool SQLiteData::read(const QString& path, DataVector& fileData)
 
 bool setStrategy(QString const& ext)
 {
-    if (ext == FILE_EXT[0]) { injector.RegisterInstance<IChartData, JSONData>(); return 1; }
-    if (ext == FILE_EXT[1]) { injector.RegisterInstance<IChartData, SQLiteData>(); return 1; }
+    if (ext == FILE_EXT[0]) { injector.RegisterInstance<IChartData, JSONData>(); return true; }
+    if (ext == FILE_EXT[1]) { injector.RegisterInstance<IChartData, SQLiteData>(); return true; }
     return false;
 }

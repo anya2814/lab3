@@ -19,7 +19,7 @@ public slots:
     void fileSelectedMWSlot(QFileInfo const&);
 signals:
     void dataChangedSignal();
-    void dataReadFailedSignal(QString const&);
+    void dataReadFailedSignal(QString const errorMsg);
 private:
     DataVector m_chartData;
     ChartWidget *m_chartWidget;
