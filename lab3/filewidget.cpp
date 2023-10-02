@@ -34,7 +34,7 @@ FileWidget::FileWidget(QWidget *parent): QWidget(parent)
     // сигнал о выборе файла в таблице
     QObject::connect(selectionModel, &QItemSelectionModel::currentChanged, this, &FileWidget::currentChangedSlot);
     // сигнал о нажатии кнопки выбора каталога с файлами
-    QObject::connect(m_catalogPushButton, &QPushButton::clicked, this, &FileWidget::PBcatalogClickedSlot);
+    QObject::connect(m_catalogPushButton, &QPushButton::clicked, this, &FileWidget::PBcatalogSlot);
 }
 
 void FileWidget::currentChangedSlot(const QModelIndex &selected, const QModelIndex &deselected)
@@ -43,7 +43,7 @@ void FileWidget::currentChangedSlot(const QModelIndex &selected, const QModelInd
     emit fileSelectedSignal(m_tableModel->fileInfo(selected));
 }
 
-void FileWidget::PBcatalogClickedSlot() {
+void FileWidget::PBcatalogSlot() {
     QString directory = QFileDialog::getExistingDirectory();
         if (!directory.isEmpty()) {
             m_tableModel->setRootPath(directory);

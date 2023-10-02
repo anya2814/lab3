@@ -24,12 +24,13 @@ public slots:
     void dataReadFailedSlot(const QString errorMsg);
 private slots:
     void PBprintPDFSlot();
-    void CBchartTypeChangedSlot(int empty);
+    void CBchartTypeSlot(int empty);
+    void CBcolorSlot(int state);
 private:
     QChartView *m_chartView;
     DataVector const& m_data;
     QComboBox *m_typeComboBox;
-    QCheckBox *m_colorbwCheckBox;
+    QCheckBox *m_colorCheckBox;
     QPushButton *m_PDFPushButton;
     QStackedWidget *m_sharedView;
     QLabel *m_infoLabel;

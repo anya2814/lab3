@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FileWidget_t {
     QByteArrayData data[9];
-    char stringdata0[113];
+    char stringdata0[106];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -39,12 +39,12 @@ QT_MOC_LITERAL(4, 41, 18), // "currentChangedSlot"
 QT_MOC_LITERAL(5, 60, 11), // "QModelIndex"
 QT_MOC_LITERAL(6, 72, 8), // "selected"
 QT_MOC_LITERAL(7, 81, 10), // "deselected"
-QT_MOC_LITERAL(8, 92, 20) // "PBcatalogClickedSlot"
+QT_MOC_LITERAL(8, 92, 13) // "PBcatalogSlot"
 
     },
     "FileWidget\0fileSelectedSignal\0\0QFileInfo\0"
     "currentChangedSlot\0QModelIndex\0selected\0"
-    "deselected\0PBcatalogClickedSlot"
+    "deselected\0PBcatalogSlot"
 };
 #undef QT_MOC_LITERAL
 
@@ -86,7 +86,7 @@ void FileWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         switch (_id) {
         case 0: _t->fileSelectedSignal((*reinterpret_cast< const QFileInfo(*)>(_a[1]))); break;
         case 1: _t->currentChangedSlot((*reinterpret_cast< const QModelIndex(*)>(_a[1])),(*reinterpret_cast< const QModelIndex(*)>(_a[2]))); break;
-        case 2: _t->PBcatalogClickedSlot(); break;
+        case 2: _t->PBcatalogSlot(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
