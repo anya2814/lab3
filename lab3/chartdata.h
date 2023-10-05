@@ -20,13 +20,19 @@
 typedef QPair<QString, QString> Data;
 typedef QList<Data> DataVector;
 
-static inline QVector<QString> FILE_EXT = {"json", "sqlite"};   // поддерж. типы расширений файлов
+static inline QVector<QString> FILE_EXT = {"dat", "json", "sqlite"};   // поддерж. типы расширений файлов
 
 class IChartData            // стратегия чтения файлов
 {
 public:
     virtual bool read(const QString& path, DataVector& fileData, QString &errorMsg) = 0;   // виртуальная функция для чтения данных в filedata из файла с путем path
     virtual ~IChartData() = default;
+};
+
+class DatData: public IChartData       // чтение файлов формата json
+{
+public:
+    bool read(const QString& path, DataVector& fileData, QString &errorMsg) override;
 };
 
 class JSONData: public IChartData       // чтение файлов формата json

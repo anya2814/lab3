@@ -91,9 +91,13 @@ void ChartWidget::PBprintPDFSlot() {
     QString filePath = QFileDialog::getSaveFileName(nullptr, "Save chart as a PDF document", {}, "PDF (*.pdf)");
     if (filePath.isEmpty()) return;
 
+    bool f = m_colorCheckBox->isChecked();
+    if (f) m_chartView->chart()->graphicsEffect()->setEnabled(false);
     QPdfWriter pdfWriter(filePath);
     QPainter painter(&pdfWriter);
+
     m_chartView->render(&painter);
+    if (f) m_chartView->chart()->graphicsEffect()->setEnabled(true);
     painter.end();
 }
 
