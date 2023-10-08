@@ -22,6 +22,7 @@ signals:
     void dataReadFailedSignal(QString const errorMsg);
 private:
     DataVector m_chartData;
+    QString m_dataName;
     ChartWidget *m_chartWidget;
     FileWidget *m_fileWidget;
 };

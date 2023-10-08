@@ -28,6 +28,6 @@ class BarChart: public ChartsTemplate
     bool createChart(QChart* chart, DataVector const& data) override;
 };
 
-bool setChartType(QString const& type);     // выбор типа графика с помощью IOC контейнера
+bool setChartType(QString const type);     // выбор типа графика с помощью IOC контейнера
 
 #endif // CHARTSTEMPLATE_H

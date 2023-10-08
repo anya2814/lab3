@@ -1,12 +1,14 @@
 #include "chartdata.h"
 
-bool DatData::read(const QString& path, DataVector& fileData, QString &errorMsg)
+bool DatData::read(const QString& path, DataVector& fileData, QString &dataName, QString &errorMsg)
 {
     QFile file(path);
     fileData = DataVector();
     if (file.isOpen()) { errorMsg = "--Файл уже открыт--"; return false; }
     if (!file.exists()) { errorMsg = "--Файл не существует--"; return false; }
     if( !file.open(QIODevice::ReadOnly)) { errorMsg = "--Не удалось открыть файл--"; return false; }
+    dataName = file.fileName().split('/').last();
+    dataName = dataName.split('.').first();
 
     QTextStream r(&file);
 
@@ -58,13 +60,15 @@ bool DatData::read(const QString& path, DataVector& fileData, QString &errorMsg)
     return true;
 }
 
-bool JSONData::read(const QString& path, DataVector& fileData, QString &errorMsg)
+bool JSONData::read(const QString& path, DataVector& fileData, QString &dataName, QString &errorMsg)
 {
     QFile file(path);
     fileData = DataVector();
     if (file.isOpen()) { errorMsg = "--Файл уже открыт--"; return false; }
     if (!file.exists()) { errorMsg = "--Файл не существует--"; return false; }
     if( !file.open(QIODevice::ReadOnly)) { errorMsg = "--Не удалось открыть файл--"; return false; }
+    dataName = file.fileName().split('/').last();
+    dataName = dataName.split('.').first();
 
     QString allData = file.readAll();
     file.close();
@@ -130,7 +134,7 @@ bool JSONData::read(const QString& path, DataVector& fileData, QString &errorMsg
     return true;
 }
 
-bool SQLiteData::read(const QString& path, DataVector& fileData, QString &errorMsg)
+bool SQLiteData::read(const QString& path, DataVector& fileData, QString &dataName, QString &errorMsg)
 {
     if (!QFile::exists(path)) { errorMsg = "--Файл не существует--"; return false; }
     fileData = DataVector();
@@ -144,6 +148,7 @@ bool SQLiteData::read(const QString& path, DataVector& fileData, QString &errorM
 
     // создаем запрос
     QString tableName = dbase.tables().first();
+    dataName = tableName;
     QString str = "SELECT * FROM " + tableName;
     query = QSqlQuery(str);
     if (!query.next()) { dbase.close(); errorMsg = "--База данных пустая--"; return false; }
@@ -190,7 +195,7 @@ bool SQLiteData::read(const QString& path, DataVector& fileData, QString &errorM
     return true;
 }
 
-bool setStrategy(QString const& ext)
+bool setStrategy(QString const ext)
 {
     if (ext == FILE_EXT[0]) { injector.RegisterInstance<IChartData, DatData>(); return true; }
     if (ext == FILE_EXT[1]) { injector.RegisterInstance<IChartData, JSONData>(); return true; }

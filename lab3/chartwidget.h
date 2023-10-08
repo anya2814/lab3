@@ -18,7 +18,7 @@ class ChartWidget: public QWidget
 {
     Q_OBJECT
 public:
-    ChartWidget(QWidget* parent, DataVector const& data);
+    ChartWidget(QWidget* parent, DataVector const& data, QString const & dataName);
 public slots:
     void drawChartSlot();
     void dataReadFailedSlot(const QString errorMsg);
@@ -29,6 +29,7 @@ private slots:
 private:
     QChartView *m_chartView;
     DataVector const& m_data;
+    QString const& m_dataName;
     QComboBox *m_typeComboBox;
     QCheckBox *m_colorCheckBox;
     QPushButton *m_PDFPushButton;
