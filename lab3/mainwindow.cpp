@@ -1,10 +1,10 @@
 #include "mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), m_chartData(), m_dataName()
+    : QMainWindow(parent)
 {
     QSplitter *splitter = new QSplitter(this);
-    m_chartWidget = new ChartWidget (this, m_chartData, m_dataName);
+    m_chartWidget = new ChartWidget (this, m_chartData);
     m_fileWidget = new FileWidget(this);
     setGeometry(100, 100, 1300, 600);
 
@@ -29,7 +29,7 @@ void MainWindow::fileSelectedMWSlot(QFileInfo const& file)
     setStrategy(ext);
     auto readingStrategy = injector.GetObject<IChartData>();
 
-    if (readingStrategy->read(file.absoluteFilePath(), m_chartData, m_dataName, errorMsg)) {
+    if (readingStrategy->read(file.absoluteFilePath(), m_chartData, errorMsg)) {
         emit MainWindow::dataChangedSignal();
     }
     else emit MainWindow::dataReadFailedSignal(errorMsg);

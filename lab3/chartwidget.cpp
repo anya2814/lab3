@@ -1,7 +1,7 @@
 #include "chartwidget.h"
 
-ChartWidget::ChartWidget(QWidget *parent, DataVector const& data, QString const & dataName)
-    : QWidget(parent), m_data(data), m_dataName(dataName)
+ChartWidget::ChartWidget(QWidget *parent, Data const& chartData)
+    : QWidget(parent), m_data(chartData)
 {
     m_chartView = new QChartView;
     m_typeComboBox = new QComboBox;
@@ -76,7 +76,6 @@ void ChartWidget::drawChartSlot() {
         dataReadFailedSlot("--Не удалось построить график по данным выбранного файла--");
     }
     else {
-        m_chartView->chart()->setTitle(m_dataName);
         m_sharedView->setCurrentWidget(m_chartView);
     }
 }

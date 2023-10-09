@@ -38,14 +38,14 @@ QT_MOC_LITERAL(3, 27, 18), // "dataReadFailedSlot"
 QT_MOC_LITERAL(4, 46, 8), // "errorMsg"
 QT_MOC_LITERAL(5, 55, 14), // "PBprintPDFSlot"
 QT_MOC_LITERAL(6, 70, 15), // "CBchartTypeSlot"
-QT_MOC_LITERAL(7, 86, 5), // "empty"
+QT_MOC_LITERAL(7, 86, 5), // "index"
 QT_MOC_LITERAL(8, 92, 11), // "CBcolorSlot"
 QT_MOC_LITERAL(9, 104, 5) // "state"
 
     },
     "ChartWidget\0drawChartSlot\0\0"
     "dataReadFailedSlot\0errorMsg\0PBprintPDFSlot\0"
-    "CBchartTypeSlot\0empty\0CBcolorSlot\0"
+    "CBchartTypeSlot\0index\0CBcolorSlot\0"
     "state"
 };
 #undef QT_MOC_LITERAL
