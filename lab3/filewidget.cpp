@@ -2,7 +2,7 @@
 
 FileWidget::FileWidget(QWidget *parent): QWidget(parent)
 {
-    m_catalogPushButton = new QPushButton(this);
+    m_catalogPushButton = new QPushButton();
     m_tableModel = new QFileSystemModel(this);  // модель файловой системы
     m_tableModel->setFilter(QDir::Files);       // только файлы показываются в таблице
     QStringList filters;

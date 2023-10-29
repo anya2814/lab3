@@ -12,19 +12,22 @@ static inline QVector<QString> CHART_TYPE {"Pie", "Bar"};   // поддерж. �
 
 class ChartsTemplate        // шаблон для графиков
 {
+protected:
+    virtual bool createChart(QChart* chart, Data const& chartData) = 0;  // метод для рисования графика
 public:
     bool setChart(QChart* chart, Data const& chartData);       // шаблонный метод для замены и установки графика
-    virtual bool createChart(QChart* chart, Data const& chartData) = 0;  // метод для рисования графика
     virtual ~ChartsTemplate() = default;
 };
 
 class PieChart: public ChartsTemplate
 {
+protected:
     bool createChart(QChart* chart, Data const& chartData) override;
 };
 
 class BarChart: public ChartsTemplate
 {
+protected:
     bool createChart(QChart* chart, Data const& chartData) override;
 };
 
