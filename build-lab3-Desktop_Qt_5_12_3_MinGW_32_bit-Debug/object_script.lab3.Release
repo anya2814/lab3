@@ -1,0 +1,10 @@
+release/main.o
+release/mainwindow.o
+release/chartstemplate.o
+release/chartdata.o
+release/filewidget.o
+release/chartwidget.o
+release/ioccontainer.o
+release/moc_mainwindow.o
+release/moc_filewidget.o
+release/moc_chartwidget.o

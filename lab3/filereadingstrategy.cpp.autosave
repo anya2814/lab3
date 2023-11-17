@@ -1,0 +1,7 @@
+#include "filereadingstrategy.h"
+
+FileReadingStrategy::FileReadingStrategy()
+{
+    
+}
+

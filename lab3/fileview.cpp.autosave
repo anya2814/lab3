@@ -1,0 +1,6 @@
+#include "fileview.h"
+
+FileWidget::FileWidget()
+{
+
+}
